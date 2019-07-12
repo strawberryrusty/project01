@@ -1,3 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
 body {
+  margin: 0;
+  font-size: 24px;
   background-color: dodgerblue;
+  border: 10px solid black;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid;
+  padding: 10px 0;
+}
+
+.game {
+  width: 600px;
+  height: 600px;
+  margin: auto;
+  padding: 50px;
+}
+
+.grid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  border: 10px solid black;
+}
+
+.grid div {
+  width: calc(100% / 10);
+  height: calc(100% / 10);
+  border: 5px solid black;
+
+}
+
+
+.snakehead {
+  background-image: url(https://i.pinimg.com/originals/45/2f/5e/452f5e72509ded6a648f40edb45f7765.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.fruit {
+  background-image: url(https://data.whicdn.com/images/265030415/original.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }

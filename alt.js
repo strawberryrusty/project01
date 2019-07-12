@@ -1,16 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.grid div')
   let currentIndex = 0
-  const width = 10
+  const width = 5
 
-
-
-
-
-
-
-  function moveMySnake(e) {
-    squares[currentIndex].classList.remove('snakehead')
+  function moveMyMole(e) {
+    squares[currentIndex].classList.remove('mole')
 
     switch(e.keyCode) {
       case 37:
@@ -26,27 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if(currentIndex + width < width * width) currentIndex += width
         break
     }
-    if(squares[currentIndex].classList.contains('fruit')) {
-      squares[currentIndex].classList.remove('fruit')
-      fruitReappears()
+
+    if(squares[currentIndex].classList.contains('worm')) {
+      squares[currentIndex].classList.remove('worm')
     }
-    squares[currentIndex].classList.add('snakehead')
-    //fruitReappears()
-
+    squares[currentIndex].classList.add('mole')
   }
-  function fruitReappears() {
-    const randomIndex = Math.floor(Math.random() * squares.length)
-    const randomSquare = squares[randomIndex]
-    randomSquare.classList.add('fruit')
+  
 
-  }
-  function growSnake () {
-
-  }
-
-
-
-
-  document.addEventListener('keyup', moveMySnake)
+  document.addEventListener('keyup', moveMyMole)
   document.addEventListener('keydown', e => e.preventDefault())
 })
