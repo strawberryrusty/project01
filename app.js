@@ -1,36 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.grid div')
-  let currentIndex = 0
   const width = 10
+  let currentIndex = 0
+  let snakes = [2,1,0]
+  let direction = 1
 
 
+  snakes.forEach(snake => squares[snake].classList.add('snake'))
 
-
-
+  setInterval(() => {
+    const tail = snakes.pop()
+    squares[tail].classList.remove('snake')
+    snakes.unshift(snakes[0] + direction)
+    console.log(snakes)
+    squares[snakes[0]].classList.add('snake')
+  }, 1000)
 
 
   function moveMySnake(e) {
-    squares[currentIndex].classList.remove('snakehead')
+    squares[currentIndex].classList.remove('snake')
 
     switch(e.keyCode) {
       case 37:
-        if(currentIndex % width !== 0) currentIndex -= 1
+        direction = -1
         break
       case 38:
-        if(currentIndex - width >= 0) currentIndex -= width
+        direction = -width
         break
       case 39:
-        if(currentIndex % width < width - 1) currentIndex += 1
+        direction = 1
         break
       case 40:
-        if(currentIndex + width < width * width) currentIndex += width
+        direction = width
         break
     }
-    if(squares[currentIndex].classList.contains('fruit')) {
-      squares[currentIndex].classList.remove('fruit')
-      fruitReappears()
-    }
-    squares[currentIndex].classList.add('snakehead')
+    // if(squares[currentIndex].classList.contains('fruit')) {
+    //   squares[currentIndex].classList.remove('fruit')
+    //   fruitReappears()
+    // }
+    // squares[currentIndex].classList.add('snake')
     //fruitReappears()
 
   }
@@ -40,9 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
     randomSquare.classList.add('fruit')
 
   }
-  function growSnake () {
-
-  }
+  // var arr = []
+  // var =
+  // function growSnake () {for(let i = 0; i < squares.length; i++) {
+  //   if(squares[currentIndex].classList.contains('fruit') && (squares[currentIndex].classList.contains('snake') ) {
+  //     squares.push
+  // //
+  //
+  //
+  //   }
+  //
+  // }
 
 
 
