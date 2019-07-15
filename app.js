@@ -13,10 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
   let interval = setInterval(step, invervalTime)
 
   function step() {
+    //deals with snake hitting border and snake hitting itself
+    if (squares[snakes[0] + direction].classList.contains('snake') || //if snake hits itself
+    ((snakes[0]+ width >= (width * width) && direction === width ) || //
+    (snakes[0] % width === width -1 && direction === 1) ||
+    (snakes[0] % width === 0 && direction === -1) ||
+    (snakes[0] - width < 0 && direction === -width))) {
+      return clearInterval(interval)
+    }
+
     const tail = snakes.pop() //removes the last item of the array and shows it
     squares[tail].classList.remove('snake') //removes snake class from the tail square
     snakes.unshift(snakes[0] + direction) //gives direction to the head of the array, eg +1 means right, plus +10 means down an row (with direction given by the moveMySnake function)
-
     //this section of code deals with the collision event,
 
     if(squares[snakes[0]].classList.contains('fruit')) {
@@ -59,7 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const randomSquare = squares[randomIndex]
     randomSquare.classList.add('fruit')
 
-  }
+  } //while loop to check for class of
+
+  // function snakeHitsBorder() {
+  //   if ((snakes[0]+ width >= width * width && direction === width ) ||
+  //      (snakes[0] % width === width -1 && direction === 1) ||
+  //      (snakes[0]% width === 0 && direction === -1) ||
+  //      (snakes[0] - width < 0 && direction === -width)) {
+  //     clearInterval(interval)
+  //   }
+  // }
 
   document.addEventListener('keyup', moveMySnake)
   document.addEventListener('keydown', e => e.preventDefault())
