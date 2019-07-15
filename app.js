@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fruitReappears() ///<= this specifically calls the function to randomly generate fruits on the grid
 
       clearInterval(interval) //clear the interval
-      invervalTime = invervalTime * 0.9 //new interval that is 10% faster
+      invervalTime = invervalTime * 0.95 //new interval that is 10% faster
       interval = setInterval(step, invervalTime) //run that interval again
     }
     squares[snakes[0]].classList.add('snake')
@@ -63,8 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
   //fruitReappears()
 
   function fruitReappears() {
-    const randomIndex = Math.floor(Math.random() * squares.length)
-    const randomSquare = squares[randomIndex]
+    let randomSquare = null
+    do{
+      const randomIndex = Math.floor(Math.random() * squares.length)
+      randomSquare = squares[randomIndex]
+    }while(randomSquare.classList.contains('snake'))
     randomSquare.classList.add('fruit')
 
   } //while loop to check for class of
