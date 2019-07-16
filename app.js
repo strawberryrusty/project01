@@ -1,16 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.grid div')
   // const notSnakesquares = document.querySelector('.grid div:not([class]) <= squares without snake class
+  const scoreBoard = document.querySelector('.score')
+  const start = document.querySelector('.start')
+
   const width = 10
   let currentIndex = 0
   let snakes = [2,1,0] //2 is head, 1 is body, 0 is tail
   let direction = 1
+  let score = 0
+  let fruitIndex = 0
 
 
-  snakes.forEach(snake => squares[snake].classList.add('snake'))
+  // snakes.forEach(snake => squares[snake].classList.add('snake'))
+  //
+  let intervalTime = 0
+  let interval = null
 
-  let invervalTime = 1000
-  let interval = setInterval(step, invervalTime)
+  // function gameInit
+  // create grid
+  // create snake
+  // set score back to 0
+
+  function gameInit() {
+    snakes.forEach(snake => squares[snake].classList.remove('snake'))
+    squares[fruitIndex].classList.remove('fruit')
+    clearInterval(interval)
+    fruitReappears()
+
+    score = 0
+    scoreBoard.innerText = score
+    intervalTime = 1000
+    snakes = [2,1,0]
+    currentIndex = 0
+    snakes.forEach(snake => squares[snake].classList.add('snake'))
+    interval = setInterval(step, intervalTime)
+  }
 
   function step() {
     //deals with snake hitting border and snake hitting itself
@@ -32,10 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
       squares[tail].classList.add('snake')
       snakes.push(tail)
       fruitReappears() ///<= this specifically calls the function to randomly generate fruits on the grid
+      score++
+      scoreBoard.textContent = score
 
       clearInterval(interval) //clear the interval
-      invervalTime = invervalTime * 0.95 //new interval that is 10% faster
-      interval = setInterval(step, invervalTime) //run that interval again
+      intervalTime = intervalTime * 0.5 //new interval that is 10% faster
+      interval = setInterval(step, intervalTime) //run that interval again
     }
     squares[snakes[0]].classList.add('snake')
   }
@@ -63,12 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
   //fruitReappears()
 
   function fruitReappears() {
-    let randomSquare = null
     do{
-      const randomIndex = Math.floor(Math.random() * squares.length)
-      randomSquare = squares[randomIndex]
-    }while(randomSquare.classList.contains('snake'))
-    randomSquare.classList.add('fruit')
+      fruitIndex = Math.floor(Math.random() * squares.length)
+    }while(squares[fruitIndex].classList.contains('snake')) //while loop done here ensure that randomly generated Fruits
+    squares[fruitIndex].classList.add('fruit')             //are not generated on the snake array
 
   } //while loop to check for class of
 
@@ -83,4 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keyup', moveMySnake)
   document.addEventListener('keydown', e => e.preventDefault())
+
+  start.addEventListener('click', gameInit)
 })
