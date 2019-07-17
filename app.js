@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.grid div')
   // const notSnakesquares = document.querySelector('.grid div:not([class]) <= squares without snake class
-  const scoreBoard = document.querySelector('.score')
+  const scoreBoard = document.querySelector('span')
   const start = document.querySelector('.start')
   const modeBtns = document.querySelectorAll('.mode')
   const width = 10
@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let score = 0
   let fruitIndex = 0
   let inverseSpeed = 0.85
-  let audio = new Audio('snapespell.mp3')
+  let audio = new Audio('mrpotter.wav')
+  let theme = new Audio('pottertheme.mp3')
 
 
 
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // set score back to 0
 
   function gameInit() {
+    theme.play()
     snakes.forEach(snake => squares[snake].classList.remove('snake'))
     squares[fruitIndex].classList.remove('fruit')
     clearInterval(interval)
