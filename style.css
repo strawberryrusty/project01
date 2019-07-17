@@ -8,20 +8,36 @@
 body {
   margin: 0;
   font-size: 24px;
-  background-color: dodgerblue;
+  background-color: black;
   border: 10px solid black;
 }
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   border-bottom: 2px solid;
   padding: 10px 0;
+  align-items: center;
+  flex-direction: column;
 }
 
+.score {
+  color: white;
+}
+
+.logo {
+  opacity: 0.8;
+}
+
+.titleboard {
+  display:flex;
+  justify-content: center;
+}
+
+
 .game {
-  width: 600px;
-  height: 600px;
+  width: 800px;
+  height: 800px;
   margin: auto;
   padding: 50px;
 }
@@ -32,6 +48,8 @@ header {
   display: flex;
   flex-wrap: wrap;
   border: 10px solid black;
+  background-image: url(https://i.pinimg.com/originals/31/0d/c2/310dc2fe36dad30361b89f6554bf7d9a.jpg);
+  background-size: cover;
 }
 
 .grid div {
@@ -43,15 +61,20 @@ header {
 
 
 .snake {
-  background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/3e78b0ee-7d21-4e35-badd-d148b5a2a5de/d3d098t-ee4336b9-72bf-444a-bef7-78db1400043c.gif);
+  background-image: url(http://images5.fanpop.com/image/photos/24500000/Always-Snape-severus-snape-and-lily-evans-24557427-100-100.gif);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .fruit {
-  background-image: url(https://data.whicdn.com/images/265030415/original.gif);
+  background-image: url(https://www.picgifs.com/avatars/avatars/harry-potter/avatars-harry-potter-129307.gif);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
 }

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let score = 0
   let fruitIndex = 0
   let inverseSpeed = 0.85
-  let audio = new Audio('snakehiss.mp3')
+  let audio = new Audio('snapespell.mp3')
 
 
 
