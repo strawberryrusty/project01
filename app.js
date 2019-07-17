@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let fruitIndex = 0
   let inverseSpeed = 0.85
   let audio = new Audio('mrpotter.wav')
-  let theme = new Audio('pottertheme.mp3')
+  let theme = new Audio('hpthemeshort.mp3')
 
 
 
