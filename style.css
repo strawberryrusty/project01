@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: 'Harry Potter';
-  src: url('http://www.fontsaddict.com/fontface/harry-potter.TTF');
+  src: url('fonts/HARRP___.TTF');
 }
 
 * {
   box-sizing: border-box;
-  font-family: "Harry Potter", sans-serif;
+  font-family: 'Harry Potter';
 }
 
 body {
@@ -15,6 +15,7 @@ body {
   font-size: 24px;
   background-color: black;
   border: 10px solid black;
+  font-family: 'Harry Potter';
 }
 
 header {
@@ -69,14 +70,14 @@ header {
 
 
 .snake {
-  background-image: url(http://images5.fanpop.com/image/photos/24500000/Always-Snape-severus-snape-and-lily-evans-24557427-100-100.gif);
+  background-image: url(snape.gif);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .fruit {
-  background-image: url(https://www.picgifs.com/avatars/avatars/harry-potter/avatars-harry-potter-129307.gif);
+  background-image: url(hp.gif);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -92,5 +93,8 @@ button {
  align-content: space-between;
  width: 190px;
  height: 30px;
-
+ background-image: url(goldbackground.jpg);
+ border: 2px solid black;
+ border radius: 20px;
+ font-size: 17px;
 }

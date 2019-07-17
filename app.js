@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     squares[fruitIndex].classList.remove('fruit')
     clearInterval(interval)
     fruitReappears()
+    direction = 1
 
     score = 0
     scoreBoard.innerText = score
