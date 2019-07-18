@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.grid div')
   // const notSnakesquares = document.querySelector('.grid div:not([class]) <= squares without snake class
   const scoreBoard = document.querySelector('span')
-  const start = document.querySelector('.start')
+  const startBtns = document.querySelectorAll('.start')
   const modeBtns = document.querySelectorAll('.mode')
+  const popUp = document.querySelector('.popUp')
   const width = 10
   let currentIndex = 0
   let snakes = [2,1,0] //2 is head, 1 is body, 0 is tail
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // set score back to 0
 
   function gameInit() {
+    popUp.style.display = 'none'
     theme.play()
     snakes.forEach(snake => squares[snake].classList.remove('snake'))
     squares[fruitIndex].classList.remove('fruit')
@@ -46,14 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function step() {
     //deals with snake hitting border and snake hitting itself
     if (
-      (snakes[0] + width >= (width * width) && direction === width ) || // if snake 
+      (snakes[0] + width >= (width * width) && direction === width ) || // if snake
       (snakes[0] % width === width - 1 && direction === 1) ||
       (snakes[0] % width === 0 && direction === -1) ||
       (snakes[0] - width < 0 && direction === -width) ||
       squares[snakes[0] + direction].classList.contains('snake')
     ) {
+      popUp.style.display = 'flex'
       return clearInterval(interval)
     }
+
 
     const tail = snakes.pop() //removes the last item of the array and shows it
     squares[tail].classList.remove('snake') //removes snake class from the tail square
@@ -71,8 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       clearInterval(interval) //clear the interval
-      intervalTime = intervalTime * inverseSpeed //new interval that is 10% faster
-      interval = setInterval(step, intervalTime) //run that interval again
+      intervalTime = intervalTime * inverseSpeed //set the new interval
+      interval = setInterval(step, intervalTime)
+      console.log(intervalTime) //run that interval again
     }
     squares[snakes[0]].classList.add('snake')
   }
@@ -82,16 +87,16 @@ document.addEventListener('DOMContentLoaded', () => {
     squares[currentIndex].classList.remove('snake')
 
     switch(e.keyCode) {
-      case 37:
+      case 74:
         direction = -1
         break
-      case 38:
+      case 73:
         direction = -width
         break
-      case 39:
+      case 76:
         direction = 1
         break
-      case 40:
+      case 75:
         direction = width
         break
     }
@@ -102,19 +107,29 @@ document.addEventListener('DOMContentLoaded', () => {
   function fruitReappears() {
     do{
       fruitIndex = Math.floor(Math.random() * squares.length)
-    }while(squares[fruitIndex].classList.contains('snake')) //while loop done here ensure that randomly generated Fruits
-    squares[fruitIndex].classList.add('fruit')             //are not generated on the snake array
+    }while(squares[fruitIndex].classList.contains('snake')) //while loop done here ensure that randomly
+    squares[fruitIndex].classList.add('fruit')             //generated
 
   }
 
   function changeMode(e) {
+    modeBtns.forEach(button => button.classList.remove('activeButton'))
     inverseSpeed = +e.target.value
+    // e.target.style.backgroundColor = 'red'
+    // e.target.style.backgroundImage = 'none'
+    e.target.classList.toggle('activeButton')
   }
+
+  // function changeColor(e) {
+  //   e.target.style.backgroundColor = 'red'
+  //   e.target.style.backgroundImage = 'none'
+  //   // e.target.classList.toggle('mode')
+  // }
+
 
   document.addEventListener('keyup', moveMySnake)
   document.addEventListener('keydown', e => e.preventDefault())
-
   modeBtns.forEach(button => button.addEventListener('click', changeMode))
-
-  start.addEventListener('click', gameInit)
+  // modeBtns.forEach(button => button.addEventListener('click', changeColor))
+  startBtns.forEach(btn => btn.addEventListener('click', gameInit))
 })
