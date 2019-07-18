@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function step() {
     //deals with snake hitting border and snake hitting itself
     if (
-      (snakes[0] + width >= (width * width) && direction === width ) || //
+      (snakes[0] + width >= (width * width) && direction === width ) || // if snake 
       (snakes[0] % width === width - 1 && direction === 1) ||
       (snakes[0] % width === 0 && direction === -1) ||
       (snakes[0] - width < 0 && direction === -width) ||
