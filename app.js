@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.grid div')
-  // const notSnakesquares = document.querySelector('.grid div:not([class]) <= squares without snake class
   const scoreBoard = document.querySelector('span')
   const startBtns = document.querySelectorAll('.start')
   const modeBtns = document.querySelectorAll('.mode')
@@ -12,20 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let score = 0
   let fruitIndex = 0
   let inverseSpeed = 0.85
-  let audio = new Audio('mrpotter.wav')
-  let theme = new Audio('hpthemeshort.mp3')
-
-
-
-  // snakes.forEach(snake => squares[snake].classList.add('snake'))
-  //
+  const audio = new Audio('mrpotter.wav')
+  const theme = new Audio('hpthemeshort.mp3')
   let intervalTime = 0
   let interval = null
 
-  // function gameInit
+  // Start button for game
   // create grid
   // create snake
   // set score back to 0
+  //set all indexes to the starting/base level
 
   function gameInit() {
     popUp.style.display = 'none'
@@ -45,17 +40,18 @@ document.addEventListener('DOMContentLoaded', () => {
     interval = setInterval(step, intervalTime)
   }
 
+  //each snake step is mapped out by this function
   function step() {
     //deals with snake hitting border and snake hitting itself
     if (
-      (snakes[0] + width >= (width * width) && direction === width ) || // if snake
-      (snakes[0] % width === width - 1 && direction === 1) ||
-      (snakes[0] % width === 0 && direction === -1) ||
-      (snakes[0] - width < 0 && direction === -width) ||
-      squares[snakes[0] + direction].classList.contains('snake')
+      (snakes[0] + width >= (width * width) && direction === width ) || // if snake hits bottom
+      (snakes[0] % width === width - 1 && direction === 1) || //if snake hits right wall
+      (snakes[0] % width === 0 && direction === -1) || //if snake hits left wall
+      (snakes[0] - width < 0 && direction === -width) || //if snake hits top  wall
+      squares[snakes[0] + direction].classList.contains('snake') //if snake head hits itself
     ) {
-      popUp.style.display = 'flex'
-      return clearInterval(interval)
+      popUp.style.display = 'flex' //turn popup element class from none to flex, ie death popup
+      return clearInterval(interval) //clear interval ie stop if snake dies
     }
 
 
@@ -71,19 +67,19 @@ document.addEventListener('DOMContentLoaded', () => {
       fruitReappears() ///<= this specifically calls the function to randomly generate fruits on the grid
       score++
       scoreBoard.textContent = score
-      audio.play()
+      audio.play() //noise after collision
 
 
       clearInterval(interval) //clear the interval
       intervalTime = intervalTime * inverseSpeed //set the new interval
-      interval = setInterval(step, intervalTime)
-      console.log(intervalTime) //run that interval again
+      interval = setInterval(step, intervalTime) //run that interval again
+      console.log(intervalTime)
     }
     squares[snakes[0]].classList.add('snake')
   }
 
 
-  function moveMySnake(e) {
+  function moveMySnake(e) { //sets the keycodes to the specific letter
     squares[currentIndex].classList.remove('snake')
 
     switch(e.keyCode) {
@@ -101,35 +97,27 @@ document.addEventListener('DOMContentLoaded', () => {
         break
     }
   }
-  // squares[currentIndex].classList.add('snake')
-  //fruitReappears()
 
+  //randomly appearing fruits on the grid that don't appear on the snake
   function fruitReappears() {
     do{
       fruitIndex = Math.floor(Math.random() * squares.length)
     }while(squares[fruitIndex].classList.contains('snake')) //while loop done here ensure that randomly
-    squares[fruitIndex].classList.add('fruit')             //generated
+    squares[fruitIndex].classList.add('fruit')             //generated fruits don't appear on snake
 
   }
 
+  // this sets the function that means for each respective button you can choose easy,hard and insane mode
+  // and toggles the background of each button to make it red if that class is active
   function changeMode(e) {
     modeBtns.forEach(button => button.classList.remove('activeButton'))
     inverseSpeed = +e.target.value
-    // e.target.style.backgroundColor = 'red'
-    // e.target.style.backgroundImage = 'none'
     e.target.classList.toggle('activeButton')
   }
 
-  // function changeColor(e) {
-  //   e.target.style.backgroundColor = 'red'
-  //   e.target.style.backgroundImage = 'none'
-  //   // e.target.classList.toggle('mode')
-  // }
-
-
+  //event listeners
   document.addEventListener('keyup', moveMySnake)
   document.addEventListener('keydown', e => e.preventDefault())
   modeBtns.forEach(button => button.addEventListener('click', changeMode))
-  // modeBtns.forEach(button => button.addEventListener('click', changeColor))
   startBtns.forEach(btn => btn.addEventListener('click', gameInit))
 })
