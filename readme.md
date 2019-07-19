@@ -2,28 +2,27 @@
 
 
 ## Overview
-Snape is an exciting Harry Potter themed version of the popular arcade game Snake. Challenge your reaction skills by avoiding the obstacles as you travel at Warp Factor speeds through space and accumulate bonus points to make into the Hall of Fame.
+Snape is an exciting Harry Potter themed version of the popular arcade game Snake. Challenge your reactions and chase Harry Potter with Professor Snake, multiply speed up and try not let Snake hit himself or a wall.
 
-This was my first project from General Assembly's Software Immersive Course. It was an individual project built in a week, and was both the first proper game I had built, and my first real-world type practice with JavaScript.
+This was my first project from General Assembly's 42nd Software Engineering Immersive Course. It was an individual project built in a week.
 
-Launch on [GitHub Pages](https://github.com/strawberryrusty). Check out the GitHub [Repo](https://strawberryrusty.github.io/project01).
+Launch on [GitHub Pages](https://github.com/strawberryrusty/project01). Check out the GitHub [Repo](https://strawberryrusty.github.io/project01).
 
-![Gameplay demo](/images/readme-screenshots/warp-factor-demo.gif)
+![Gameplay demo](///)
 
 ## Brief
 
 * **Render a grid-based game in the browser**
-* **Switch turns** between two players
-* **Design logic for winning** & **visually display which player won**
+* **Render a "Snape" Snake that moves dynamically with keystrokes**
+* **Design randomly generating "Harry Potter" elements that Snape can chase**
 * **Include separate HTML / CSS / JavaScript files**
-* Use **Javascript or jQuery** for **DOM manipulation**
+* Use **Javascript** for **DOM manipulation**
 * **Deploy your game online**, using Github Pages, where the rest of the world can access it
 * Use **semantic markup** for HTML and CSS (adhere to best practices)
 
 
 
 ## Technologies Used
-
 * HTML5 with HTML5 audio
 * CSS
 * JavaScript
@@ -36,19 +35,22 @@ Launch on [GitHub Pages](https://github.com/strawberryrusty). Check out the GitH
 
 ### Grid Layout & Generation of objects on screen
 
-I decided the simplest way to represent the grid would be as an array of divs, wrapped within a flex-box, with each 'item' having an assigned CSS class to represent the items visually. This would mean representing the movement of items was straightforward using their indexes within the main array - for horizontal movement: +/- 1, and vertical movement: +/- 10(for a grid of width 10 boxes).
+After several initial iterations, I found that a suitable size for my game would be a 10 x 10 grid, which still gives allows gives a sense of difficulty, without depriving the the "fun factor" of the game in terms of both scoring points and growing your Snake. The best to represent this 10 x 10 grid which was created by an array of 100 divs, wrapped in class of "grid" and then styled with CSS to set the width and height.
 
-Debris would be generated at the top using Math.random to pick a random number between 0-9 for its starting position within the grid. Then using setInterval to 'move' it down at each interval, removing the debris class from the current position and adding it to the new position.
+The Snape 'snake' would start as an array that always starts at index numbers: 0,1,2 and the Harrys appear randomly using Math Random and a while loop that means that each Harry created on the grid is not created on a div that is already occupied by the Snake.
 
 ### Functionality
 #### Collision
-How would the app know if the user's spacecraft and and debris have collided?
+How would the app know if the Snape and and Harry have collided?
 I had to define what a collision was: when two or more items occupy the same space.
 Each item had an index within the array, called position, if the position of the spacecraft and debris were the same, there was a collision:
+
 ``` JavaScript
-if (spacecraftPos === debrisPos1){
-  console.log('Game Over! You have crashed.');
-}
+if(squares[snakes[0]].classList.contains('fruit')) {
+  squares[snakes[0]].classList.remove('fruit')
+  squares[tail].classList.add('snake')
+  snakes.push(tail)
+  fruitReappears()
 ```
 
 #### Keypresses
