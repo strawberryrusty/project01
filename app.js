@@ -1,18 +1,20 @@
+//lets/variables/constants
+
 document.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.grid div')
   const scoreBoard = document.querySelector('span')
   const startBtns = document.querySelectorAll('.start')
   const modeBtns = document.querySelectorAll('.mode')
   const popUp = document.querySelector('.popUp')
-  const width = 10
+  const width = 10 //as board is currently 10x10
   let currentIndex = 0
   let snakes = [2,1,0] //2 is head, 1 is body, 0 is tail
-  let direction = 1
+  let direction = 1 //so snake always starts moving left on start by default
   let score = 0
   let fruitIndex = 0
-  let inverseSpeed = 0.85
-  const audio = new Audio('mrpotter.wav')
-  const theme = new Audio('hpthemeshort.mp3')
+  let inverseSpeed = 0.9
+  const audio = new Audio('sounds/mrpotter.wav')
+  const theme = new Audio('sounds/hpthemeshort.mp3')
   let intervalTime = 0
   let interval = null
 
@@ -78,8 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
     squares[snakes[0]].classList.add('snake')
   }
 
-
-  function moveMySnake(e) { //sets the keycodes to the specific letter
+  //sets keycodes for specific keys 
+  function moveMySnake(e) {
     squares[currentIndex].classList.remove('snake')
 
     switch(e.keyCode) {
