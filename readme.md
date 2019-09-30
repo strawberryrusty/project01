@@ -6,9 +6,8 @@ Snape is an exciting Harry Potter themed version of the popular arcade game Snak
 
 This was my first project from General Assembly's 42nd Software Engineering Immersive Course. It was an individual project built in a week.
 
-Launch on [GitHub Pages](https://github.com/strawberryrusty/project01). Check out the GitHub [Repo](https://strawberryrusty.github.io/project01).
+Launch on [GitHub Pages](https://strawberryrusty.github.io/project01). Check out the GitHub [Repo](https://github.com/strawberryrusty/project01).
 
-![Gameplay demo](///)
 
 ## Brief
 
@@ -53,20 +52,32 @@ if(squares[snakes[0]].classList.contains('fruit')) {
   fruitReappears()
 ```
 
-#### Keypresses
-From the start, I set myself a little challenge to enable the user to navigate the menus, start/pause and play the game using only the keyboard.
+#### Snake movement
+How did I make the snake move automatically and dynamically?
+I had to remove
 
-The user would have to manoeuvre the shuttle to avoid collision. I started off by adding clickable buttons to move left and right, it worked but wasn't exactly user friendly.
-Once I figured out how to add keyboard interactivity by adding an event listener to the window, I mapped out all the keyboard buttons I'd need and wrote logic to perform a function depending on which menu the user was on:
+#### Keypresses
+How did I make the Snake move automatically and dynamically? I created a function that would remove the class-list of snake from the Snake array, anytime a keystroke occurred. For example if the user made snake moved to the right, the most div that occupied the tail of the snake would have the "class" of snake removed, meaning it snake styling is removed, giving the animation effect. This was repeated for left, down, and up movements as well, and is shown below:
 
 ``` JavaScript
-window.addEventListener('keydown', function(e) {
-  if (e.which === 38) { // up arrow
-    if(gameIsRunning){
-      moveUp();
-    }
+function moveMySnake(e) {
+  squares[currentIndex].classList.remove('snake')
+
+  switch(e.keyCode) {
+    case 74:
+      direction = -1
+      break
+    case 73:
+      direction = -width
+      break
+    case 76:
+      direction = 1
+      break
+    case 75:
+      direction = width
+      break
   }
-});
+}
 ```
 
 #### Audio

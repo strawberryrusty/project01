@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     squares[snakes[0]].classList.add('snake')
   }
 
-  //sets keycodes for specific keys 
+  //sets keycodes for specific keys
   function moveMySnake(e) {
     squares[currentIndex].classList.remove('snake')
 
