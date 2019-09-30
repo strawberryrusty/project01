@@ -42,7 +42,7 @@ The Snape 'snake' would start as an array that always starts at index numbers: 0
 #### Collision
 How would the app know if the Snape and and Harry have collided?
 I had to define what a collision was: when two or more items occupy the same space.
-Each item had an index within the array, called position, if the position of the spacecraft and debris were the same, there was a collision:
+Each item had an index within the array, called position, if the position of the snake and fruit were the same, there was a collision:
 
 ``` JavaScript
 if(squares[snakes[0]].classList.contains('fruit')) {
