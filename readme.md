@@ -80,112 +80,43 @@ function moveMySnake(e) {
 }
 ```
 
-#### Audio
-In my previous projects, I had a lot of fun working with Audio, so I added a background track and sound effects for all button clicks/presses. As a bonus, I thought it would be good UX to enable toggling music and sounds, so I added these to the game pause menu and global clickable links at the top-right of the screen.
+#### Featured Piece of Code
+
+This piece of code is apart of the code block that handles every step the snake takes. I needed to create a mechanism that dealt with the snake death i.e whenever the snake hit the border or hit itself and also have a "death popup" that tells the user that they have died and if they would like to restart the game. The death popup has a class-list with the CSS styling that sets the display as none, however whenever the snake dies, this popup's display CSS style is now set to flex, so appearing over the game board. The snake death logic is elaborated further below:
 ``` JavaScript
-//enable all sounds
-areSoundsOn = true;
-console.log('sound effects have been switched on');
-toggleSoundsButton.textContent = 'Sounds: ON';
-if(areSoundsOn){
-  sfx.setAttribute('src', 'sounds/click.mp3');
-  sfx.play();
-}
-```
+function step() {
 
-#### Featured Piece of Code no. 1
-
-This function is called upon after the user has crashed the spacecraft, to create an object with their name and score; this is then pushed into an array that is sorted by highest scores, top 10 objects are selected and populated as `li` DOM objects in the Hall of Fame.
-``` JavaScript
-function addPlayerToHoF(playerName, score){
-  class Player{
-    constructor(name, highScore){
-      if (playerName === null){
-        playerName = 'Anonymous Star Lord';
-      }
-      this.name = playerName;
-      this.highScore = score;
-      console.log(`${name} has scored ${highScore}`);
-    }
+  if (
+    (snakes[0] + width >= (width * width) && direction === width ) ||
+    (snakes[0] % width === width - 1 && direction === 1) ||
+    (snakes[0] % width === 0 && direction === -1) ||
+    (snakes[0] - width < 0 && direction === -width) ||
+    squares[snakes[0] + direction].classList.contains('snake')
+  ) {
+    popUp.style.display = 'flex'
+    return clearInterval(interval)
   }
-
-  while (leaderboard.firstChild) {
-    leaderboard.removeChild(leaderboard.firstChild);
-  }
-
-  leaders.push(new Player(playerName, score));
-  leaders.sort(compare);
-  leaders = leaders.slice(0,10);
-  leaders.forEach(function(element){
-    const newElement = document.createElement('li');
-    newElement.textContent = `${element.highScore} >>> ${element.name}`;
-    leaderboard.appendChild(newElement);
-  });
-}
 ```
 
-#### Featured Piece of Code no. 2
-
-This piece of CSS gives the grid its distinctive perspective look; adding that to the background this immerses the player into the feeling of warp-travel. From `/style.css`.
-``` CSS
-.grid {
-  transform: perspective(5px) rotateX(1deg);
-}
-```
 
 ## Screenshots
 
 **Gameplay at MVP**
 
-![MVP Gameplay](/images/readme-screenshots/mvp.png)
+![MVP Gameplay](/images/readme-photos/snape.png)
 
-**After some styling**
-
-![After styling 1](/images/readme-screenshots/style1.png)
-![After styling 2](/images/readme-screenshots/style2.png)
-
-### Final Product
-![Landing page](/images/readme-screenshots/home.png)
-
-![Briefing page](/images/readme-screenshots/briefing.png)
-
-![Game mode select page](/images/readme-screenshots/gamemode.png)
-
-![Ship select page](/images/readme-screenshots/shipselect.png)
-
-![Gameplay screenshot](/images/readme-screenshots/gameplay.png)
-
-![Pause menu screenshot](/images/readme-screenshots/pausemenu.png)
-
-![Scoreboard screenshot](/images/readme-screenshots/score.png)
 
 ## Bugs
 Below is a list of some of the known bugs within the game:
 
-* Shooting - it's not completed yet, however I left the visual effect in, as I found it cool!
-  The bug with this, is that if you fire again before the first shot has managed to 'leave' the grid, the projectile remains frozen on the grid, until you shoot over it with another projectile.
+* If a user is moving the snake along the left border of the grid and gets to the top border, and moves the snake right in the last minute in order to avoid death, there is a slight delay and causes the top left cell of the grid to have the board background image and not the snake.
 
-* Debris Generation - sometimes, when debris is generated at the top, its position jumps.
-  I believe this may be the interval timing of the previous wave clearing the new wave.
+* When the fruit (in this case Harry Potter) is eaten by the snake, it sometimes reappears on a cell that is already occupied by the snake. Although this was a problem I already had in my mind when making the game that I tried to solve with JS, it needs more of a robust solution.
 
-* Game restart - if during the game, the pause menu is called and then the game is resumed - all debris is cleared and regenerated as if new.
 
-* Bonus - the collection of bonus items was intended to increment the score by a set number once; during testing I noticed that once the bonus had been collected and if the spacecraft remains on the bonus item's position, the points kept accumulating until the next bonus appeared elsewhere. This was due to the line of code responsible for score incrementation being inside the setInterval block.
-I decided to use this as a feature for the game and kept it in.
-
-## Wins and Blockers
-
-One of the problems I had initially, was the removal of debris after it had left the grid; the console would return many errors stating it couldn't remove the class of undefined - I managed to get around this by limiting the movement of debris only within the 10x20 grid.
-
-The biggest win, by far, was the amount of confidence I gained working with JavaScript during this project. I got the opportunity to apply my new learnings in a real-world project and achieved more than I had set out at the start.
 
 ## Future Content
 
-Along with adding the shooting functionality, there are a number of potential future features I'd like to implement, such as:
-* Boss game-mode, where the player must destroy an alien being that fires multiple projectiles at the player.
-* An additional player(2nd spacecraft) that can help with Boss mode or just play Arcade mode to see who can score more points.
-* More debris, different patterns of waves of debris.
-* Ability to choose from a variety of spacecraft with different images, survivability and weaponry.
-* Ability to increase the grid size.
-* Authentication so users can keep track of their highest scores, compare it to other players globally and develop their spacecraft with upgrades and achievements.
-* And much more!
+There are a number of potential future features I'd like to implement, such as:
+* Adding to the harder modes such as "Wizard Mode" by having fruit reappear, but only for a specified period of time, meaning the snake/user would have to chase down the fruit with more urgency.
+* 2 Player mode, where 2 players with 2 different Snakes can play and compete at the same time.
