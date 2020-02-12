@@ -30,6 +30,9 @@ Launch on [GitHub Pages](https://strawberryrusty.github.io/project01). Check out
 * Photopea
 * fontsaddict.com
 
+## Technologies Used
+Deployed on Gitub Pages
+
 ## Approach Taken
 
 ### Grid Layout & Generation of objects on screen
