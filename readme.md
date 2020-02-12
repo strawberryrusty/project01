@@ -102,7 +102,7 @@ function step() {
 
 ## Screenshots
 
-**Gameplay at Final Stage**
+**Game at Final Stage**
 
 ![MVP Gameplay](/images/readme-photos/snape.png)
 
