@@ -53,10 +53,6 @@ if(squares[snakes[0]].classList.contains('fruit')) {
   fruitReappears()
 ```
 
-#### Snake movement
-How did I make the snake move automatically and dynamically?
-I had to remove
-
 #### Keypresses
 How did I make the Snake move automatically and dynamically? I created a function that would remove the class-list of snake from the Snake array, anytime a keystroke occurred. For example if the user made snake moved to the right, the most div that occupied the tail of the snake would have the "class" of snake removed, meaning it snake styling is removed, giving the animation effect. This was repeated for left, down, and up movements as well, and is shown below:
 
